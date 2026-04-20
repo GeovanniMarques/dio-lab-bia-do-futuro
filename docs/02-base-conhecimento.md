@@ -2,14 +2,14 @@
 
 ## Dados Utilizados
 
-Descreva se usou os arquivos da pasta `data`, por exemplo:
+O agente utiliza os arquivos da pasta `data` para criar uma experiência personalizada e fundamentada em dados reais do cliente fictício.
 
 | Arquivo | Formato | Utilização no Agente |
 |---------|---------|---------------------|
-| `historico_atendimento.csv` | CSV | Contextualizar interações anteriores |
-| `perfil_investidor.json` | JSON | Personalizar recomendações |
-| `produtos_financeiros.json` | JSON | Sugerir produtos adequados ao perfil |
-| `transacoes.csv` | CSV | Analisar padrão de gastos do cliente |
+| `historico_atendimento.csv` | CSV | Utilizado para manter a continuidade do suporte e evitar repetições de temas já resolvidos (como dúvidas sobre CDB/Selic). |
+| `perfil_investidor.json` | JSON | Crucial para entender as metas do João Silva (ex: reserva de emergência e entrada do apartamento) e o nível de risco aceito. |
+| `produtos_financeiros.json` | JSON | Serve como o "catálogo" de soluções que a Bia pode sugerir quando o usuário tem sobra de caixa no mês. |
+| `transacoes.csv` | CSV | A base principal para a análise de economia, onde a Bia identifica gastos com lazer e transporte para sugerir otimizações. |
 
 > [!TIP]
 > **Quer um dataset mais robusto?** Você pode utilizar datasets públicos do [Hugging Face](https://huggingface.co/datasets) relacionados a finanças, desde que sejam adequados ao contexto do desafio.
@@ -18,38 +18,36 @@ Descreva se usou os arquivos da pasta `data`, por exemplo:
 
 ## Adaptações nos Dados
 
-> Você modificou ou expandiu os dados mockados? Descreva aqui.
-
-[Sua descrição aqui]
+Os dados foram mantidos conforme o repositório original para garantir a compatibilidade com os scripts de carregamento, porém, o agente foi instruído a dar **prioridade interpretativa** ao arquivo `transacoes.csv` para realizar o cálculo de "Sobra Mensal" (Receita - Despesas) em tempo real.
 
 ---
 
 ## Estratégia de Integração
 
 ### Como os dados são carregados?
-> Descreva como seu agente acessa a base de conhecimento.
-
-[ex: Os JSON/CSV são carregados no início da sessão e incluídos no contexto do prompt]
+Os arquivos são carregados utilizando a biblioteca `pandas` (para os CSVs) e o módulo `json` do Python no início da execução da aplicação Streamlit. Eles são convertidos para strings formatadas ou dicionários que o LLM consegue processar.
 
 ### Como os dados são usados no prompt?
-> Os dados vão no system prompt? São consultados dinamicamente?
-
-[Sua descrição aqui]
+Os dados são injetados dinamicamente no **Contexto do Usuário**. Sempre que o cliente faz uma pergunta, o "Orquestrador" anexa o perfil do investidor e o resumo das transações ao prompt, garantindo que a resposta da Bia não seja genérica, mas sim baseada nos números reais do João Silva.
 
 ---
 
 ## Exemplo de Contexto Montado
 
-> Mostre um exemplo de como os dados são formatados para o agente.
+Para garantir a precisão, os dados são passados para a LLM no seguinte formato:
 
-```
-Dados do Cliente:
-- Nome: João Silva
-- Perfil: Moderado
-- Saldo disponível: R$ 5.000
+```text
+[CONTEXTO FINANCEIRO DO CLIENTE]
+Cliente: João Silva (32 anos, Analista de Sistemas)
+Perfil: Moderado | Renda Mensal: R$ 5.000,00
+Meta Atual: Completar reserva de emergência (Faltam R$ 5.000,00)
 
-Últimas transações:
-- 01/11: Supermercado - R$ 450
-- 03/11: Streaming - R$ 55
-...
-```
+RESUMO DE TRANSAÇÕES (OUTUBRO/2025):
+- Receita: R$ 5.000,00 (Salário)
+- Moradia: R$ 1.380,00 (Aluguel + Luz)
+- Lazer/Transporte: R$ 350,90 (Netflix + Uber + Combustível)
+- Saúde: R$ 188,00 (Farmácia + Academia)
+
+PRODUTOS DISPONÍVEIS PARA RECOMENDAÇÃO:
+- Tesouro Selic (Baixo risco, indicado para Reserva de Emergência)
+- CDB Liquidez Diária (102% do CDI)
