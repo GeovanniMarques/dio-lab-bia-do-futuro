@@ -1,149 +1,117 @@
-# 🤖 Agente Financeiro Inteligente com IA Generativa
+# Fin - Mentora de Economia Inteligente 🚀
 
-## Contexto
+![Status do Projeto](https://img.shields.io/badge/Status-Em%20Desenvolvimento-blue)
+![Bootcamp](https://img.shields.io/badge/Bootcamp-Bradesco%20%26%20DIO-red)
 
-Os assistentes virtuais no setor financeiro estão evoluindo de simples chatbots reativos para **agentes inteligentes e proativos**. Neste desafio, você vai idealizar e prototipar um agente financeiro que utiliza IA Generativa para:
-
-- **Antecipar necessidades** ao invés de apenas responder perguntas
-- **Personalizar** sugestões com base no contexto de cada cliente
-- **Cocriar soluções** financeiras de forma consultiva
-- **Garantir segurança** e confiabilidade nas respostas (anti-alucinação)
-
-> [!TIP]
-> Na pasta [`examples/`](./examples/) você encontra referências de implementação para cada etapa deste desafio.
+A **Fin** é um agente de inteligência artificial generativa desenvolvido como projeto final do Bootcamp **Bradesco - Java Cloud Native** em parceria com a **DIO**. O objetivo é transformar a gestão financeira pessoal em uma experiência educativa e proativa.
 
 ---
 
-## O Que Você Deve Entregar
-
-### 1. Documentação do Agente
-
-Defina **o que** seu agente faz e **como** ele funciona:
-
-- **Caso de Uso:** Qual problema financeiro ele resolve? (ex: consultoria de investimentos, planejamento de metas, alertas de gastos)
-- **Persona e Tom de Voz:** Como o agente se comporta e se comunica?
-- **Arquitetura:** Fluxo de dados e integração com a base de conhecimento
-- **Segurança:** Como evitar alucinações e garantir respostas confiáveis?
-
-📄 **Template:** [`docs/01-documentacao-agente.md`](./docs/01-documentacao-agente.md)
+## 📌 Índice
+1. [Visão Geral](#visão-geral)
+2. [Documentação do Agente](#documentação-do-agente)
+3. [Base de Conhecimento](#base-de-conhecimento)
+4. [Estratégia de Prompts](#estratégia-de-prompts)
+5. [Como Executar](#como-executar)
+6. [Avaliação e Métricas](#avaliação-e-métricas)
+7. [Pitch](#pitch)
 
 ---
 
-### 2. Base de Conhecimento
-
-Utilize os **dados mockados** disponíveis na pasta [`data/`](./data/) para alimentar seu agente:
-
-| Arquivo | Formato | Descrição |
-|---------|---------|-----------|
-| `transacoes.csv` | CSV | Histórico de transações do cliente |
-| `historico_atendimento.csv` | CSV | Histórico de atendimentos anteriores |
-| `perfil_investidor.json` | JSON | Perfil e preferências do cliente |
-| `produtos_financeiros.json` | JSON | Produtos e serviços disponíveis |
-
-Você pode adaptar ou expandir esses dados conforme seu caso de uso.
-
-📄 **Template:** [`docs/02-base-conhecimento.md`](./docs/02-base-conhecimento.md)
+## 📺 Visão Geral
+Muitas pessoas têm dificuldade em interpretar seus gastos e planejar o futuro. A **Fin** atua como uma mentora que "lê" a realidade financeira do usuário (via CSV/JSON) e oferece conselhos personalizados, focando sempre na criação de uma reserva de emergência e educação financeira.
 
 ---
 
-### 3. Prompts do Agente
+## 📑 Documentação do Agente
+O agente foi desenhado com uma persona consultiva e acessível.
+- **Nome:** Fin
+- **Objetivo:** Analisar gastos e sugerir otimizações de orçamento.
+- **Persona:** Educativa, encorajadora e focada em segurança.
 
-Documente os prompts que definem o comportamento do seu agente:
-
-- **System Prompt:** Instruções gerais de comportamento e restrições
-- **Exemplos de Interação:** Cenários de uso com entrada e saída esperada
-- **Tratamento de Edge Cases:** Como o agente lida com situações limite
-
-📄 **Template:** [`docs/03-prompts.md`](./docs/03-prompts.md)
+> [Confira a documentação completa aqui](./docs/01-documentacao-agente.md)
 
 ---
 
-### 4. Aplicação Funcional
+## 📂 Base de Conhecimento
+A Fin utiliza dados estruturados para garantir que suas respostas sejam baseadas em fatos, evitando alucinações:
+- `transacoes.csv`: Histórico de consumo do cliente.
+- `perfil_investidor.json`: Metas e tolerância a risco.
+- `produtos_financeiros.json`: Opções de investimento em renda fixa.
 
-Desenvolva um **protótipo funcional** do seu agente:
-
-- Chatbot interativo (sugestão: Streamlit, Gradio ou similar)
-- Integração com LLM (via API ou modelo local)
-- Conexão com a base de conhecimento
-
-📁 **Pasta:** [`src/`](./src/)
+> [Veja os detalhes da integração de dados](./docs/02-base-conhecimento.md)
 
 ---
 
-### 5. Avaliação e Métricas
+## 🧠 Estratégia de Prompts
+Utilizamos técnicas de **Grounding** e **Few-Shot Prompting** para garantir que a Fin:
+1. Nunca invente dados financeiros.
+2. Saiba lidar com perguntas fora de escopo.
+3. Mantenha o tom de voz "Fin".
 
-Descreva como você avalia a qualidade do seu agente:
-
-**Métricas Sugeridas:**
-- Precisão/assertividade das respostas
-- Taxa de respostas seguras (sem alucinações)
-- Coerência com o perfil do cliente
-
-📄 **Template:** [`docs/04-metricas.md`](./docs/04-metricas.md)
+> [Acesse o guia de prompts](./docs/03-prompts.md)
 
 ---
 
-### 6. Pitch
+## 🛠️ Como Executar
 
-Grave um **pitch de 3 minutos** (estilo elevador) apresentando:
+### Pré-requisitos
+- Python 3.10 ou superior
+- Chave de API (OpenAI ou similar)
 
-- Qual problema seu agente resolve?
-- Como ele funciona na prática?
-- Por que essa solução é inovadora?
+### Passo a Passo
+```bash
+# Clone o repositório
+git clone [https://github.com/GeovanniMarques/dio-lab-bia-do-futuro.git](https://github.com/GeovanniMarques/dio-lab-bia-do-futuro.git)
 
-📄 **Template:** [`docs/05-pitch.md`](./docs/05-pitch.md)
+# Instale as dependências
+pip install -r src/requirements.txt
 
----
+# Configure sua chave no arquivo .env
+OPENAI_API_KEY=seu_token_aqui
 
-## Ferramentas Sugeridas
-
-Todas as ferramentas abaixo possuem versões gratuitas:
-
-| Categoria | Ferramentas |
-|-----------|-------------|
-| **LLMs** | [ChatGPT](https://chat.openai.com/), [Copilot](https://copilot.microsoft.com/), [Gemini](https://gemini.google.com/), [Claude](https://claude.ai/), [Ollama](https://ollama.ai/) |
-| **Desenvolvimento** | [Streamlit](https://streamlit.io/), [Gradio](https://www.gradio.app/), [Google Colab](https://colab.research.google.com/) |
-| **Orquestração** | [LangChain](https://www.langchain.com/), [LangFlow](https://www.langflow.org/), [CrewAI](https://www.crewai.com/) |
-| **Diagramas** | [Mermaid](https://mermaid.js.org/), [Draw.io](https://app.diagrams.net/), [Excalidraw](https://excalidraw.com/) |
-
----
-
-## Estrutura do Repositório
-
-```
-📁 lab-agente-financeiro/
-│
-├── 📄 README.md
-│
-├── 📁 data/                          # Dados mockados para o agente
-│   ├── historico_atendimento.csv     # Histórico de atendimentos (CSV)
-│   ├── perfil_investidor.json        # Perfil do cliente (JSON)
-│   ├── produtos_financeiros.json     # Produtos disponíveis (JSON)
-│   └── transacoes.csv                # Histórico de transações (CSV)
-│
-├── 📁 docs/                          # Documentação do projeto
-│   ├── 01-documentacao-agente.md     # Caso de uso e arquitetura
-│   ├── 02-base-conhecimento.md       # Estratégia de dados
-│   ├── 03-prompts.md                 # Engenharia de prompts
-│   ├── 04-metricas.md                # Avaliação e métricas
-│   └── 05-pitch.md                   # Roteiro do pitch
-│
-├── 📁 src/                           # Código da aplicação
-│   └── app.py                        # (exemplo de estrutura)
-│
-├── 📁 assets/                        # Imagens e diagramas
-│   └── ...
-│
-└── 📁 examples/                      # Referências e exemplos
-    └── README.md
+# Rode a aplicação
+streamlit run src/app.py
 ```
 
+## 📊 Avaliação e Métricas
+
+A eficácia do agente **Fin** foi validada através de uma série de testes estruturados, garantindo que a inteligência artificial opere dentro dos limites de segurança e precisão técnica exigidos para o setor financeiro.
+
+### Cenários de Teste e Resultados
+| ID | Cenário de Teste | Resultado Esperado | Status |
+|----|------------------|-------------------|--------|
+| 01 | Cálculo de Sobra Mensal | Subtrair despesas (CSV) da renda (JSON) corretamente. | ✅ Passou |
+| 02 | Bloqueio de Escopo | Recusar perguntas não financeiras (ex: previsão do tempo). | ✅ Passou |
+| 03 | Recomendação Conservadora | Sugerir apenas Renda Fixa para o perfil moderado do João. | ✅ Passou |
+| 04 | Prevenção de Alucinação | Admitir ignorância sobre dados não presentes na base. | ✅ Passou |
+
+### Conclusões de Qualidade
+- **Assertividade:** O agente demonstrou alta precisão ao extrair dados dos arquivos CSV/JSON.
+- **Segurança:** As travas de persona impediram a recomendação de ativos de alto risco, mantendo o foco educativo.
+- **Melhoria Contínua:** Identificou-se que a latência pode ser reduzida otimizando o tamanho do contexto enviado para a LLM.
+
 ---
 
-## Dicas Finais
+## 📢 Pitch
 
-1. **Comece pelo prompt:** Um bom system prompt é a base de um agente eficaz
-2. **Use os dados mockados:** Eles garantem consistência e evitam problemas com dados sensíveis
-3. **Foque na segurança:** No setor financeiro, evitar alucinações é crítico
-4. **Teste cenários reais:** Simule perguntas que um cliente faria de verdade
-5. **Seja direto no pitch:** 3 minutos passam rápido, vá ao ponto
+### 1. O Problema
+Muitos brasileiros enfrentam dificuldades em interpretar seus hábitos de consumo e planejar o futuro financeiro devido ao "economês" técnico e à complexidade das planilhas bancárias. O João Silva, nosso cliente fictício, possui renda estável, mas não visualiza como atingir sua meta de reserva de emergência.
+
+### 2. A Solução
+A **Fin** é uma mentora financeira baseada em IA Generativa que humaniza os dados bancários. Ela analisa as transações reais e o perfil do investidor para oferecer conselhos proativos e educativos, transformando tabelas frias em conversas motivadoras voltadas para objetivos reais.
+
+### 3. Diferencial e Impacto
+O grande diferencial da **Fin** é a integração direta com bases de conhecimento personalizadas, garantindo respostas sem alucinações. O impacto social reside na democratização da literacia financeira, auxiliando o cidadão a tomar decisões seguras e conscientes.
+
+---
+
+## 🤝 Contribuição
+
+Este projeto foi desenvolvido como parte do **Bootcamp Bradesco GenAI & Dados**, ministrado pela **DIO**.
+
+- **Desenvolvedor:** [Geovanni Marques](https://github.com/GeovanniMarques)
+- **Tecnologias:** Python, Streamlit, Pandas e OpenAI/Gemini API.
+- **Objetivo:** Aplicar conceitos de Engenharia de Prompts e RAG (Retrieval-Augmented Generation) em um cenário real de suporte financeiro.
+
+Sinta-se à vontade para abrir uma *issue* ou enviar um *pull request* com sugestões de melhorias!
